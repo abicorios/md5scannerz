@@ -6,4 +6,5 @@ copy longpathgo.exe md5scanerz\resources\app /y
 copy longpathgo.exe md5scanerz /y
 copy md5scannerzrb.exe md5scanerz\resources\app /y
 copy md5scannerzrb.exe md5scanerz /y
+copy package.json md5scanerz\package.json
 start cmd /c "cd md5scanerz && npm start"
