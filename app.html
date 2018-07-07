@@ -7,6 +7,10 @@
 p {
 	text-align: left;
 }
+textarea {
+width:80vw;
+height:30vh;
+}
 </style>
 </head>
 <body>
@@ -49,8 +53,8 @@ myrun.on('close', (code) => {
 }
 function mymain()
 {
-reg=/^[a-zA-Z]:([\\/]\w+)+[\\/]?$/;
-if (!checkInput(document.getElementById("myto").value)){alert("Введите правильный путь к пустой папке.");return 0;}
+	reg=/^[a-zA-Z]:([\\/][^\\/<>:"|?*]+)+[\\/]?$/;
+if (!checkInput(document.getElementById("myto").value)){alert(`Введите правильный путь к пустой папке ${myto}.`);return 0;}
 if (!checkInput(document.getElementById("myfrom").value)){alert("Введите правильный путь к папке для сканирования.");return 0;}
 mylittlerun(`${process.cwd()}/resources/app/longpathgo.exe`,["mytype",document.getElementById("myto").value],function(){},function(data){alert(`Папка ${document.getElementById("myto").value} не существует, введите путь к существующей папке`)},function(){});
 mylittlerun(`${process.cwd()}/resources/app/longpathgo.exe`,["myfiles",document.getElementById("myto").value],function(data){if(data.length>1){alert(`Папка ${document.getElementById("myto").value} не пустая, укажите пустую папку для записи результата.`)}},function(){},function(){});
