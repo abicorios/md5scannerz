@@ -10,10 +10,16 @@
   "main": "app/background.js",
   "build": {
     "appId": "com.md5scannerz",
+    "win": {
+	    "target": "portable",
+	    "asar":"false"
+    },
     "files": [
       "app/**/*",
       "node_modules/**/*",
-      "package.json"
+      "package.json",
+      "longpathgo.exe",
+      "md5scannerzrb.exe"
     ],
     "directories": {
       "buildResources": "resources"
