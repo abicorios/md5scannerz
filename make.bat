@@ -20,9 +20,7 @@ if not %errorlevel%==0 (choco install git --x86 -y
 refreshenv)
 if not exist longpathgo.exe go build longpathgo.go
 for %%f in ("longpathgo.exe") do set mylongpathgoexe=%%~tf
-echo %mylongpathgoexe%
 for %%f in ("longpathgo.go") do set mylongpathgo=%%~tf
-echo %mylongpathgo%
 if "%mylongpathgoexe%" lss "%mylongpathgo%" go build longpathgo.go
 if not exist md5scannerzrb.exe start /wait cmd /c "ocra md5scannerzrb.rb"
 for %%f in ("md5scannerzrb.exe") do set mymd5scannerzrbexe=%%~tf
