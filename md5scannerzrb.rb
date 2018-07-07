@@ -2,13 +2,10 @@ require 'fileutils'
 require 'digest'
 require 'date'
 def myrmtree(imypath)
-#puts "now i try remove #{imypath}"
 	`longpathgo.exe myrmtree "#{imypath}"`
-#FileUtils.rm_rf(imypath)
 end
 def myosremove(imypath)
 	myrmtree(imypath)
-#FileUtils.rm_rf(imypath)
 end
 def wrap(mystr)
 mystr.gsub('\\','/')
@@ -39,27 +36,12 @@ okfile.write(a+"\n")
 end
 def md5(myfile)
 	`longpathgo.exe md5 "#{myfile}"`.chomp
-#(Digest::MD5.file myfile).to_s.upcase
 end
 def drop(x,sep)
 x.split(sep)[0..-2].join(sep)
 end
 def mytype(ipath)
 	`longpathgo.exe mytype "#{ipath}"`.chomp
-#if ipath.match?(/\.(7z|zip|rar)$/)
-#return 'archive'
-#end
-#if File.file?ipath
-#if ipath.match?(/(7z|zip|rar)/)
-#return 'archive'
-#else
-#return 'file'
-#end
-#elsif File.directory?ipath
-#return 'dir'
-#else
-#return 'error: it is not file and not dir'
-#end
 end
 def inbuffer(ipath,ibuffer)
 ipath.include?ibuffer
@@ -69,7 +51,6 @@ def myfiles(ipath)
 end
 def isempty(ipath)
 	myfiles(ipath).length==0
-#Dir.children("\\\\?\\"+ipath.gsub("/","\\")).length==0
 end
 def readz(ipath,ito,ibuffer,okfile,gmyfrom)
 	#puts "ipath is #{ipath}"
