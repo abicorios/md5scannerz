@@ -1,8 +1,9 @@
 require 'fileutils'
 require 'digest'
 require 'date'
+puts Dir.pwd
 def myrmtree(imypath)
-	`longpathgo.exe myrmtree "#{imypath}"`
+	`#{ARGV[2]}longpathgo.exe myrmtree "#{imypath}"`
 end
 def myosremove(imypath)
 	myrmtree(imypath)
@@ -35,19 +36,19 @@ puts a
 okfile.write(a+"\n")
 end
 def md5(myfile)
-	`longpathgo.exe md5 "#{myfile}"`.chomp
+	`#{ARGV[2]}longpathgo.exe md5 "#{myfile}"`.chomp
 end
 def drop(x,sep)
 x.split(sep)[0..-2].join(sep)
 end
 def mytype(ipath)
-	`longpathgo.exe mytype "#{ipath}"`.chomp
+	`#{ARGV[2]}longpathgo.exe mytype "#{ipath}"`.chomp
 end
 def inbuffer(ipath,ibuffer)
 ipath.include?ibuffer
 end
 def myfiles(ipath)
-`longpathgo.exe myfiles "#{ipath}"`.chomp.split(",")
+`#{ARGV[2]}longpathgo.exe myfiles "#{ipath}"`.chomp.split(",")
 end
 def isempty(ipath)
 	myfiles(ipath).length==0
@@ -108,8 +109,8 @@ if not exe.match?(/[A-Z]\:\//)
 puts 'Install 7z http://www.7-zip.org/'
 exit
 end
-if ARGV.length!=2
-puts 'md5scunerzrb[.exe] C:\path\to\empty\result\folder C:\path\to\source\folder\for\scan'
+if ARGV.length!=3
+puts 'md5scunerzrb[.exe] C:\path\to\empty\result\folder C:\path\to\source\folder\for\scan C:\path\to\dir\of\electron\exe\file'
 exit
 end
 myto=ARGV[0]
