@@ -18,6 +18,9 @@ if not %errorlevel%==0 (gem install ocra)
 where git
 if not %errorlevel%==0 (choco install git --x86 -y
 refreshenv)
+where vim
+if not %errorlevel%==0 (choco install vim -y
+refreshenv)
 if not exist longpathgo.exe go build longpathgo.go
 for %%f in ("longpathgo.exe") do set mylongpathgoexe=%%~tf
 for %%f in ("longpathgo.go") do set mylongpathgo=%%~tf
@@ -27,3 +30,4 @@ for %%f in ("md5scannerzrb.exe") do set mymd5scannerzrbexe=%%~tf
 for %%f in ("md5scannerzrb.rb") do set mymd5scannerzrb=%%~tf
 if "%mymd5scannerzrbexe%" lss "%mymd5scannerzrb%" start /wait cmd /c "ocra md5scannerzrb.rb"
 if not exist md5scanerz start /wait cmd /c "git clone https://github.com/szwacz/electron-boilerplate.git md5scanerz && cd md5scanerz && npm install"
+vim -c %%s/\d\{2\}\.\d\{2\}.\d\{4\}/%date:~-7,-5%.%date:~-10,-8%.%date:~-4%/ -c x app.html
