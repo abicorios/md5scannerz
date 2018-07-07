@@ -20,43 +20,59 @@ p {
     <p>Напечатайте путь к папке для сканирования: <input type="text" id="myfrom" value="D:\test\long"></p>
     <p><button id="but" onclick='mymain()'>Start</button></p>
 	<script>
-function mymain()
+function mylittlerun(command,parameters,printfunction,errorfunction,endfunction)
 {
-
-reg=/^[a-zA-Z]:([\\/]\w+)+[\\/]?$/;
-if (!checkInput(document.getElementById("myto").value)){alert("Введите правильный путь к пустой папке.");return 0;}
-if (!checkInput(document.getElementById("myfrom").value)){alert("Введите правильный путь к папке для сканирования.");return 0;}
 const { spawn } = require('child_process');
-const myrun = spawn(`${process.cwd()}/resources/app/longpathgo.exe`,["mytype",document.getElementById("myto").value]);
+const myrun = spawn(command,parameters);
 myrun.stdout.on('data', (data) => {
-	//p(data);
+	printfunction(data);
 	  console.log(`stdout: ${data}`);
 });
 myrun.stderr.on('data', (data) => {
 	  console.log(`stderr: ${data}`);
-	alert(`Папка ${document.getElementById("myto").value} не существует, введите путь к существующей папке`)
+	errorfunction(data);
 });
 myrun.on('close', (code) => {
 	  console.log(`child process exited with code ${code}`);
-	  //document.getElementById('alltext').value+="Готово\n"
-	  //alert('Готово')
+	endfunction();
 });
-
-
-const myrun2 = spawn(`${process.cwd()}/resources/app/md5scannerzrb.exe`,[document.getElementById("myto").value,document.getElementById("myfrom").value]);
-myrun2.stdout.on('data', (data) => {
-p(data);
-	  console.log(`stdout: ${data}`);
-});
-myrun2.stderr.on('data', (data) => {
-	  console.log(`stderr: ${data}`);
-	//alert(`Папка ${document.getElementById("myto").value} не существует, введите путь к существующей папке`)
-});
-myrun2.on('close', (code) => {
-	  console.log(`child process exited with code ${code}`);
-	  document.getElementById('alltext').value+="Готово\n"
-	  alert('Готово')
-});
+}
+function mymain()
+{
+reg=/^[a-zA-Z]:([\\/]\w+)+[\\/]?$/;
+if (!checkInput(document.getElementById("myto").value)){alert("Введите правильный путь к пустой папке.");return 0;}
+if (!checkInput(document.getElementById("myfrom").value)){alert("Введите правильный путь к папке для сканирования.");return 0;}
+mylittlerun(`${process.cwd()}/resources/app/longpathgo.exe`,["mytype",document.getElementById("myto").value],function(){},function(data){alert(`Папка ${document.getElementById("myto").value} не существует, введите путь к существующей папке`)},function(){});
+const { spawn } = require('child_process');
+//const myrun = spawn(`${process.cwd()}/resources/app/longpathgo.exe`,["mytype",document.getElementById("myto").value]);
+//myrun.stdout.on('data', (data) => {
+//	//p(data);
+//	  console.log(`stdout: ${data}`);
+//});
+//myrun.stderr.on('data', (data) => {
+//	  console.log(`stderr: ${data}`);
+//	alert(`Папка ${document.getElementById("myto").value} не существует, введите путь к существующей папке`)
+//});
+//myrun.on('close', (code) => {
+//	  console.log(`child process exited with code ${code}`);
+//	  //document.getElementById('alltext').value+="Готово\n"
+//	  //alert('Готово')
+//});
+mylittlerun(`${process.cwd()}/resources/app/md5scannerzrb.exe`,[document.getElementById("myto").value,document.getElementById("myfrom").value],p,function(data){p(data)},function(){document.getElementById('alltext').value+="Готово\n";alert('Готово')});
+//const myrun2 = spawn(`${process.cwd()}/resources/app/md5scannerzrb.exe`,[document.getElementById("myto").value,document.getElementById("myfrom").value]);
+//myrun2.stdout.on('data', (data) => {
+//p(data);
+//	  console.log(`stdout: ${data}`);
+//});
+//myrun2.stderr.on('data', (data) => {
+//	  console.log(`stderr: ${data}`);
+//	//alert(`Папка ${document.getElementById("myto").value} не существует, введите путь к существующей папке`)
+//});
+//myrun2.on('close', (code) => {
+//	  console.log(`child process exited with code ${code}`);
+//	  document.getElementById('alltext').value+="Готово\n"
+//	  alert('Готово')
+//});
 }
 	</script>
     <p><textarea id="alltext">Информация о ходе работы программы
