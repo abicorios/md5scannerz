@@ -19,6 +19,16 @@ p {
     <p>Напечатайте путь к папке для сканирования: <input type="text" id="myfrom" value="D:\test\long"></p>
     <p><button id="but" onclick='mymain()'>Start</button></p>
 	<script>
+function p(myvalue)
+{
+var textarea = document.getElementById('alltext');
+textarea.value += myvalue.toString()+"\n";
+textarea.scrollTop = textarea.scrollHeight;
+}
+function checkInput(mystr)
+{
+return reg.test(mystr);
+}
 function mylittlerun(command,parameters,printfunction,errorfunction,endfunction)
 {
 const { spawn } = require('child_process');
@@ -30,6 +40,7 @@ myrun.stdout.on('data', (data) => {
 myrun.stderr.on('data', (data) => {
 	  console.log(`stderr: ${data}`);
 	errorfunction(data);
+	return 0;
 });
 myrun.on('close', (code) => {
 	  console.log(`child process exited with code ${code}`);
@@ -42,23 +53,12 @@ reg=/^[a-zA-Z]:([\\/]\w+)+[\\/]?$/;
 if (!checkInput(document.getElementById("myto").value)){alert("Введите правильный путь к пустой папке.");return 0;}
 if (!checkInput(document.getElementById("myfrom").value)){alert("Введите правильный путь к папке для сканирования.");return 0;}
 mylittlerun(`${process.cwd()}/resources/app/longpathgo.exe`,["mytype",document.getElementById("myto").value],function(){},function(data){alert(`Папка ${document.getElementById("myto").value} не существует, введите путь к существующей папке`)},function(){});
+mylittlerun(`${process.cwd()}/resources/app/longpathgo.exe`,["myfiles",document.getElementById("myto").value],function(data){if(data.length>1){alert(`Папка ${document.getElementById("myto").value} не пустая, укажите пустую папку для записи результата.`)}},function(){},function(){});
 mylittlerun(`${process.cwd()}/resources/app/md5scannerzrb.exe`,[document.getElementById("myto").value,document.getElementById("myfrom").value],p,function(data){p(data)},function(){document.getElementById('alltext').value+="Готово\n";alert('Готово')});
 }
 	</script>
     <p><textarea id="alltext">Информация о ходе работы программы
 </textarea></p>
-	<script>
-function p(myvalue)
-{
-var textarea = document.getElementById('alltext');
-textarea.value += myvalue.toString()+"\n";
-textarea.scrollTop = textarea.scrollHeight;
-}
-function checkInput(mystr)
-{
-return reg.test(mystr);
-}
-	</script>
   </div>
   <script src="app.js"></script>
 </body>
