@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>md5restorez</title>
+<style type="text/css">
+p {
+	text-align: left;
+}
+</style>
+</head>
+<body>
+
+  <div id="app" class="container" style="display: none;">
+    <h1 id="greet" style="color:white"></h1>
+    <p>md5scannerz v1.0.0 01.07.2018</p>
+    <p>omonim2007 <a href="http://pscd.ru/forum/index.php?/topic/321-omonims-sety-dlia-retro-konsolei-8-64-bit" class="js-external-link">http://pscd.ru/forum/index.php?/topic/321-omonims-sety-dlia-retro-konsolei-8-64-bit</a></p>
+    <p>abicorios <a href="https://github.com/abicorios" class="js-external-link">https://github.com/abicorios</a></p>
+    <p>Напечатайте путь к пустой папке, в неё будет помещён результат работы програмы: <input type="text" id="myto" value="D:\test\0"></p>
+    <p>Напечатайте путь к папке для сканирования: <input type="text" id="myfrom" value="D:\test\long"></p>
+    <p><button id="but" onclick='mymain()'>Start</button></p>
+	<script>
+function mymain()
+{
+
+reg=/^[a-zA-Z]:([\\/]\w+)+[\\/]?$/;
+if (!checkInput(document.getElementById("myto").value)){alert("Введите правильный путь к пустой папке.");return 0;}
+if (!checkInput(document.getElementById("myfrom").value)){alert("Введите правильный путь к папке для сканирования.");return 0;}
+const { spawn } = require('child_process');
+const myrun = spawn(`${process.cwd()}/resources/app/longpathgo.exe`,["mytype",document.getElementById("myto").value]);
+myrun.stdout.on('data', (data) => {
+	//p(data);
+	  console.log(`stdout: ${data}`);
+});
+myrun.stderr.on('data', (data) => {
+	  console.log(`stderr: ${data}`);
+	alert(`Папка ${document.getElementById("myto").value} не существует, введите путь к существующей папке`)
+});
+myrun.on('close', (code) => {
+	  console.log(`child process exited with code ${code}`);
+	  //document.getElementById('alltext').value+="Готово\n"
+	  //alert('Готово')
+});
+
+
+const myrun2 = spawn(`${process.cwd()}/resources/app/md5scannerzrb.exe`,[document.getElementById("myto").value,document.getElementById("myfrom").value]);
+myrun2.stdout.on('data', (data) => {
+p(data);
+	  console.log(`stdout: ${data}`);
+});
+myrun2.stderr.on('data', (data) => {
+	  console.log(`stderr: ${data}`);
+	//alert(`Папка ${document.getElementById("myto").value} не существует, введите путь к существующей папке`)
+});
+myrun2.on('close', (code) => {
+	  console.log(`child process exited with code ${code}`);
+	  document.getElementById('alltext').value+="Готово\n"
+	  alert('Готово')
+});
+}
+	</script>
+    <p><textarea id="alltext">Информация о ходе работы программы
+</textarea></p>
+	<script>
+function p(myvalue)
+{
+var textarea = document.getElementById('alltext');
+textarea.value += myvalue.toString()+"\n";
+textarea.scrollTop = textarea.scrollHeight;
+}
+function checkInput(mystr)
+{
+return reg.test(mystr);
+}
+//function mymain()
+//{
+//	if checkInput(!document.getElementById('myto').value) {alert('Введите путь без опечаток');return 1;}
+//}
+	</script>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
