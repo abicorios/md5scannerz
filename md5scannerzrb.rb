@@ -10,7 +10,6 @@ def myosremove(imypath)
 	myrmtree(imypath)
 #FileUtils.rm_rf(imypath)
 end
-myosremove(ARGV[0])
 def wrap(mystr)
 mystr.gsub('\\','/')
 end
