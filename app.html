@@ -43,6 +43,7 @@ if (!checkInput(document.getElementById("myto").value)){alert("Введите п
 if (!checkInput(document.getElementById("myfrom").value)){alert("Введите правильный путь к папке для сканирования.");return 0;}
 mylittlerun(`${process.cwd()}/resources/app/longpathgo.exe`,["mytype",document.getElementById("myto").value],function(){},function(data){alert(`Папка ${document.getElementById("myto").value} не существует, введите путь к существующей папке`)},function(){});
 mylittlerun(`${process.cwd()}/resources/app/md5scannerzrb.exe`,[document.getElementById("myto").value,document.getElementById("myfrom").value],p,function(data){p(data)},function(){document.getElementById('alltext').value+="Готово\n";alert('Готово')});
+}
 	</script>
     <p><textarea id="alltext">Информация о ходе работы программы
 </textarea></p>
