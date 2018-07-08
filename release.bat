@@ -7,4 +7,5 @@ copy longpathgo.exe md5scanerz /y
 copy md5scannerzrb.exe md5scanerz\resources\app /y
 copy md5scannerzrb.exe md5scanerz /y
 copy package.json md5scanerz\package.json /y
-start cmd /c "cd md5scanerz && npm run release"
+start /wait cmd /c "cd md5scanerz && npm run release"
+copy  md5scanerz\dist\md5scannerz* /y
