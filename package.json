@@ -2,7 +2,7 @@
   "name": "md5scannerz",
   "productName": "md5scannerz",
   "description": "Scan folder tree to csv file",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "private": true,
   "author": "omonim2007 and abicorios",
   "copyright": "© 2018, omonim2007 and abicorios inc.",

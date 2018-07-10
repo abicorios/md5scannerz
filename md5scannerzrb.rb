@@ -53,7 +53,7 @@ end
 def isempty(ipath)
 	myfiles(ipath).length==0
 end
-def readz(ipath,ito,ibuffer,okfile,gmyfrom)
+def readz(ipath,ito,ibuffer,okfile,gmyfrom,exe)
 	#puts "ipath is #{ipath}"
 	for i in myfiles(ipath)
 		thisthing="#{ipath}/#{i}"
@@ -74,18 +74,18 @@ def readz(ipath,ito,ibuffer,okfile,gmyfrom)
 		end
 		if imytype=='archive'
 			if inbuffer(ipath,ibuffer)
-				mycmd="7z x \"\\\\?\\#{thisthing}\" -o\"\\\\?\\#{ipath}/#{drop(i,'.')}\" -aou".gsub('/',"\\")
+				mycmd="#{exe}7za.exe x \"\\\\?\\#{thisthing}\" -o\"\\\\?\\#{ipath}/#{drop(i,'.')}\" -aou".gsub('/',"\\")
 				p(mycmd,okfile)
 				system(mycmd)
-				readz(ibuffer,ito,ibuffer,okfile)
+				readz(ibuffer,ito,ibuffer,okfile,gmyfrom,exe)
 				myosremove(thisthing)
 			end
 			if not inbuffer(ipath,ibuffer)
 				#puts "gmyfrom is #{gmyfrom}"
-				mycmd="7z x \"\\\\?\\#{thisthing}\" -o\"\\\\?\\#{ibuffer}#{ipath.sub(gmyfrom,'')}/#{drop(i,'.')}\" -aou".gsub('/',"\\")
+				mycmd="#{exe}7za.exe x \"\\\\?\\#{thisthing}\" -o\"\\\\?\\#{ibuffer}#{ipath.sub(gmyfrom,'')}/#{drop(i,'.')}\" -aou".gsub('/',"\\")
 				p(mycmd,okfile)
 				system(mycmd)
-				readz(ibuffer,ito,ibuffer,okfile,gmyfrom)
+				readz(ibuffer,ito,ibuffer,okfile,gmyfrom,exe)
 			end
 		end
 		if imytype=='dir'
@@ -94,7 +94,7 @@ def readz(ipath,ito,ibuffer,okfile,gmyfrom)
 					myrmtree(thisthing)
 				end
 			else
-				readz(thisthing,ito,ibuffer,okfile,gmyfrom)
+				readz(thisthing,ito,ibuffer,okfile,gmyfrom,exe)
 				if isempty(thisthing)
 					if inbuffer(ipath,ibuffer)
 						myrmtree(thisthing)
@@ -104,15 +104,18 @@ def readz(ipath,ito,ibuffer,okfile,gmyfrom)
 		end
 	end
 end		
+=begin
 exe=`where 7z`.chomp.gsub('\\','/').sub('/7z.exe','')
 if not exe.match?(/[A-Z]\:\//)
-puts 'Install 7z http://www.7-zip.org/'
+puts 'Install 7za.exe http://www.7-zip.org/'
 exit
 end
+=end
 if ARGV.length!=3
-puts 'md5scunerzrb[.exe] C:\path\to\empty\result\folder C:\path\to\source\folder\for\scan C:\path\to\dir\of\electron\exe\file'
+puts 'md5scunerzrb[.exe] C:\empty\result\dir C:\source\dir\for\scan C:\dir\of\electron\exe\files'
 exit
 end
+exe=ARGV[2]+"7z1805-extra/"
 myto=ARGV[0]
 myto=norm(myto)
 $myto=myto
@@ -142,6 +145,6 @@ f=File.open("#{myto}/mylog.txt",'w')
 fcsv=File.open("#{myto}/#{myfrom.split('/')[-1]} (#{Date.today.strftime('%d.%m.%Y')}).csv",'a')
 fcsv.write("path,name,md5\n")
 fcsv.close
-readz(myfrom,myto,mybuffer,f,myfrom)
+readz(myfrom,myto,mybuffer,f,myfrom,exe)
 myrmtree(mybuffer)
 f.close
