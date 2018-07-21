@@ -24,7 +24,6 @@ compileIfChanged.exe longpathgo.go longpathgo.exe go build longpathgo.go
 if not exist md5scannerzrb.exe start /wait cmd /c "ocra md5scannerzrb.rb"
 compileIfChanged.exe md5scannerzrb.rb md5scannerzrb.exe ocra md5scannerzrb.rb
 if not exist md5scanerz start /wait cmd /c "git clone https://github.com/szwacz/electron-boilerplate.git md5scanerz && cd md5scanerz && npm install"
-rem start /wait cmd /c vim -c %%s/\d\{2\}\.\d\{2\}.\d\{4\}/%date:~-7,-5%.%date:~-10,-8%.%date:~-4%/ -c x app.html
 start /wait cmd /c ruby date.rb
 if not exist md5scannerzgo start /wait cmd /c git clone https://github.com/abicorios/md5scannerzgo
 if not exist md5scannerzgo.exe start /wait cmd /c go build md5scannerzgo\md5scannerzgo.go
