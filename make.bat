@@ -3,20 +3,22 @@ if not %errorlevel%==0 (start /wait cmd /c @"%SystemRoot%\System32\WindowsPowerS
 rem C:\ProgramData\chocolatey\bin\RefreshEnv)
 where 7z /q
 if not %errorlevel%==0 (start /wait cmd /c choco install 7zip -y)
+where git
+if not %errorlevel%==0 (start /wait cmd /c choco install git -y)
 rem refreshenv)
 where go /q
 if not %errorlevel%==0 (start /wait cmd /c choco install golang --x86 -y)
 rem refreshenv)
 where ruby /q
-if not %errorlevel%==0 (start /wait cmd /c choco install ruby --x86 -y)
+if not %errorlevel%==0 (start /wait cmd /c choco install ruby --x86 -y -f
+start /wait cmd /c choco install ruby --x86 -y -f)
 rem refreshenv)
 where ocra /q
 if not %errorlevel%==0 (start /wait cmd /c gem install ocra)
-where git
-if not %errorlevel%==0 (start /wait cmd /c choco install git -y)
 rem refreshenv)
 where node /q
-if not %errorlevel%==0 (start /wait cmd /c choco install nodejs --x86 -y)
+if not %errorlevel%==0 (start /wait cmd /c choco install nodejs --x86 -y -f
+start /wait cmd /c choco install nodejs --x86 -y -f)
 rem refreshenv)
 where vim
 if not %errorlevel%==0 (start /wait cmd /c choco install vim -y)
