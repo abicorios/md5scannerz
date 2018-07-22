@@ -7,7 +7,7 @@ choco uninstall ruby -y
 choco install ruby -y
 refreshenv
 ```
-Maybe it is better to install Ruby before make.bat.
+Maybe it is better to install Ruby and Node before make.bat.
 # start
 For start run as admin start.bat
 # release
