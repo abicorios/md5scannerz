@@ -17,8 +17,6 @@ where vim
 if not %errorlevel%==0 (start /wait cmd /c choco install vim -y)
 if not exist compileIfChanged start /wait cmd /c git clone https://github.com/abicorios/compileIfChanged
 if not exist compileIfChanged.exe start /wait cmd /c go build compileIfChanged\compileIfChanged.go
-if not exist longpathgo.exe start /wait cmd /c go build longpathgo.go
-compileIfChanged.exe longpathgo.go longpathgo.exe go build longpathgo.go
 if not exist md5scanerz start /wait cmd /c "git clone https://github.com/szwacz/electron-boilerplate.git md5scanerz && cd md5scanerz && npm install"
 start /wait cmd /c ruby date.rb
 if not exist md5scannerzgo start /wait cmd /c git clone https://github.com/abicorios/md5scannerzgo
