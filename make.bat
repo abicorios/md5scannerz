@@ -8,11 +8,9 @@ if not %errorlevel%==0 (start /wait cmd /c choco install git -y)
 where go /q
 if not %errorlevel%==0 (start /wait cmd /c choco install golang --x86 -y)
 where ruby /q
-if not %errorlevel%==0 (start /wait cmd /c choco install ruby -y -f && refreshenv)
-rem start /wait cmd /c refreshenv)
+if not %errorlevel%==0 (start /wait cmd /c choco install ruby -y -f)
 where node /q
-if not %errorlevel%==0 (start /wait cmd /c choco install nodejs --x86 -y -f && refreshenv)
-rem start /wait cmd /c choco install nodejs --x86 -y -f)
+if not %errorlevel%==0 (start /wait cmd /c choco install nodejs --x86 -y -f)
 where vim
 if not %errorlevel%==0 (start /wait cmd /c choco install vim -y)
 if not exist compileIfChanged start /wait cmd /c git clone https://github.com/abicorios/compileIfChanged
@@ -20,5 +18,7 @@ if not exist compileIfChanged.exe start /wait cmd /c go build compileIfChanged\c
 if not exist md5scanerz start /wait cmd /c "git clone https://github.com/szwacz/electron-boilerplate.git md5scanerz && cd md5scanerz && npm install"
 start /wait cmd /c ruby date.rb
 if not exist md5scannerzgo start /wait cmd /c git clone https://github.com/abicorios/md5scannerzgo
-if not exist md5scannerzgo.exe start /wait cmd /c go build md5scannerzgo\md5scannerzgo.go
+copy md5scannerzgo\md5scannerzgo.go
+if not exist md5scannerzgo.exe start /wait cmd /c go build md5scannerzgo.go
+compileIfChanged.exe md5scannerzgo.go md5scannerzgo.exe go build md5scannerzgo.go
 xcopy md5scannerzgo\7z1805-extra 7z1805-extra\ /s /y
