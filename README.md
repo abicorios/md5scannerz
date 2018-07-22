@@ -1,7 +1,13 @@
 # md5scannerz
 Scan folder tree to csv file
 # compilation
-For compilation run make.bat
+For compilation run make.bat If `where ruby` do not show path in new terminal, so you need as admin:
+```
+choco uninstall ruby -y
+choco install ruby -y
+refreshenv
+```
+Maybe it is better to install Ruby before make.bat.
 # start
 For start run as admin start.bat
 # release
