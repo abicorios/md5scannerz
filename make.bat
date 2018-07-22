@@ -8,11 +8,11 @@ if not %errorlevel%==0 (start /wait cmd /c choco install git -y)
 where go /q
 if not %errorlevel%==0 (start /wait cmd /c choco install golang --x86 -y)
 where ruby /q
-if not %errorlevel%==0 (start /wait cmd /c choco install ruby -y -f)
+if not %errorlevel%==0 (start /wait cmd /c choco install ruby -y -f && refreshenv)
 rem start /wait cmd /c refreshenv)
 where node /q
-if not %errorlevel%==0 (start /wait cmd /c choco install nodejs --x86 -y -f
-start /wait cmd /c choco install nodejs --x86 -y -f)
+if not %errorlevel%==0 (start /wait cmd /c choco install nodejs --x86 -y -f && refreshenv)
+rem start /wait cmd /c choco install nodejs --x86 -y -f)
 where vim
 if not %errorlevel%==0 (start /wait cmd /c choco install vim -y)
 if not exist compileIfChanged start /wait cmd /c git clone https://github.com/abicorios/compileIfChanged
