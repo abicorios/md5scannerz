@@ -23,3 +23,4 @@ if not exist md5scanerz start /wait cmd /c "git clone https://github.com/szwacz/
 start /wait cmd /c ruby date.rb
 if not exist md5scannerzgo start /wait cmd /c git clone https://github.com/abicorios/md5scannerzgo
 if not exist md5scannerzgo.exe start /wait cmd /c go build md5scannerzgo\md5scannerzgo.go
+xcopy md5scannerzgo\7z1805-extra 7z1805-extra\ /s /y
