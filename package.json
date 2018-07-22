@@ -18,8 +18,7 @@
       "app/**/*",
       "node_modules/**/*",
       "package.json",
-      "longpathgo.exe",
-      "md5scannerzrb.exe",
+      "md5scannerzgo.exe",
       "7z1805-extra"
     ],
     "directories": {
