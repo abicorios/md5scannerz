@@ -1,9 +1,8 @@
 where choco /q
 if not %errorlevel%==0 (start /wait cmd /c @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin")
-rem C:\ProgramData\chocolatey\bin\RefreshEnv)
 where 7z /q
 if not %errorlevel%==0 (start /wait cmd /c choco install 7zip -y)
-where git
+where git /q
 if not %errorlevel%==0 (start /wait cmd /c choco install git -y)
 where go /q
 if not %errorlevel%==0 (start /wait cmd /c choco install golang --x86 -y)
@@ -11,7 +10,7 @@ where ruby /q
 if not %errorlevel%==0 (start /wait cmd /c choco install ruby -y -f)
 where node /q
 if not %errorlevel%==0 (start /wait cmd /c choco install nodejs --x86 -y -f)
-where vim
+where vim /q
 if not %errorlevel%==0 (start /wait cmd /c choco install vim -y)
 if not exist compileIfChanged start /wait cmd /c git clone https://github.com/abicorios/compileIfChanged
 if not exist compileIfChanged.exe start /wait cmd /c go build compileIfChanged\compileIfChanged.go
