@@ -1,4 +1,4 @@
-start /wait cmd /c "make.bat"
+start /wait cmd /c 2make.bat
 copy app.html md5scanerz\app /y
 copy app.js md5scanerz\src /y
 if not exist md5scanerz\resources\app mkdir md5scanerz\resources\app
