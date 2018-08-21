@@ -12,7 +12,7 @@ if not %errorlevel%==0 (choco install ruby --x86 -y)
 where node /q
 if not %errorlevel%==0 (choco install nodejs --x86 -y)
 where vim /q
-if not %errorlevel%==0 (start https://ftp.nluug.nl/pub/vim/pc/gvim81.exe)
+if not %errorlevel%==0 (start https://ftp.nluug.nl/pub/vim/pc/gvim81.exe
 @set /p a=It is a pause, press Enter after an installation of vim
-@set a=
+@set a=)
 call refreshenv
