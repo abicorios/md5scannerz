@@ -1,5 +1,5 @@
 *.exe
-/md5scanerz
+/md5scannerz
 *~
 *.swp
 /compileIfChanged

@@ -1,4 +1,4 @@
-1adminInstallTools.bat
+call 1adminInstallTools.bat
 if not exist compileIfChanged git clone https://github.com/abicorios/compileIfChanged
 start /wait cmd /c "cd compileIfChanged && git pull"
 if not exist compileIfChanged.exe go build compileIfChanged\compileIfChanged.go
