@@ -1,4 +1,4 @@
-make.bat
+call 2make.bat
 copy app.html md5scannerz\app /y
 copy app.js md5scannerz\src /y
 if not exist md5scannerz\resources\app mkdir md5scannerz\resources\app
