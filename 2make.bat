@@ -9,4 +9,4 @@ if not exist md5scannerzgo git clone https://github.com/abicorios/md5scannerzgo
 start /wait cmd /c "cd md5scannerzgo && git pull"
 if not exist md5scannerzgo.exe go build md5scannerzgo\md5scannerzgo.go
 compileIfChanged.exe md5scannerzgo\md5scannerzgo.go md5scannerzgo.exe go build md5scannerzgo\md5scannerzgo.go
-xcopy md5scannerzgo\7z1805-extra 7z1805-extra\ /s /y
+if not exist 7z1805-extra xcopy md5scannerzgo\7z1805-extra 7z1805-extra\ /s /y
